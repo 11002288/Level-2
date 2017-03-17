@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,8 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Timer time; 
+	Font titleFont;
+	Rocketship rs;
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
@@ -17,7 +20,9 @@ int currentState = MENU_STATE;
 	//GameObject go;
 	GamePanel(){
 		 time = new Timer(1000 / 60, this);
+		 rs = new Rocketship(250, 700, 50, 50);
 	//	go = new GameObject(100, 100);
+		 titleFont = new Font("Arial", Font.PLAIN, 48);
 	}
 	void currentState(){
 	
@@ -36,14 +41,28 @@ int currentState = MENU_STATE;
 	}
 	void drawupdateMenuState(Graphics g){
 		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);    
-
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);  
+		g.setColor(Color.ORANGE);
+     g.setFont(titleFont);
+	g.drawString("League Invaders", 30, 100);
+	g.drawString("Press enter to Play!!!", 30, 200);
+	g.drawString("Press Space To Shoot ", 0, 400);
+	g.drawString("and Arrows to move", 10, 470);
 	}
 	void drawupdateGameState(Graphics g){
-		
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);    
+
+
 	}
 	void drawupdateEndState(Graphics g){
-		
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		g.setFont(titleFont);
+g.setColor(Color.GREEN);
+g.drawString("Game Over", 30, 100);
+g.drawString("Press BACKSPACE to Restart", 5, 300);
+g.drawString("Restart", 150, 400);
 	}
 void startGame(){
 time.start();	
@@ -84,6 +103,15 @@ public void paintComponent(Graphics g){
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("Look left-------> I said left");
+		if(e.getKeyCode()==KeyEvent.VK_ENTER){
+			
+			currentState++;
+		}
+		if(currentState > END_STATE){
+			currentState = MENU_STATE;
+		}
+
+
 	}
 	@Override
 	public void keyReleased(KeyEvent e) {
