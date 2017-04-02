@@ -1,14 +1,19 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 
 public class Rocketship extends GameObject {
 	int xspeed;
 	int yspeed;
-
+	boolean right;
+	boolean left;
+	boolean up;
+	boolean down;
+    //x
+	//y
 	Rocketship(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		xspeed = 5;
-		yspeed = 5;
+		
 		// TODO Auto-generated constructor stub
 	}
 
@@ -20,8 +25,23 @@ public class Rocketship extends GameObject {
 	}
 
 	void update() {
-		x += xspeed;
-		y += yspeed;
+
+	if(up==true){
+	y -= 5;	
+		
+	}
+	if(down==true){
+		y += 5;	
+			
+		}
+	if(right==true){
+	x += 5;	
+			
+		}
+	if(left==true){
+		x -= 5;	
+			
+		}
 		System.out.println("update:" + x);
 	}
 }
