@@ -26,9 +26,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		rs = new Rocketship(250, 700, 50, 50);
 		// go = new GameObject(100, 100);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
-	Om = new ObjectManager();
-	Om.addObject(rs);
-	
+		Om = new ObjectManager();
+		Om.addObject(rs);
+
 	}
 
 	void currentState() {
@@ -42,6 +42,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		System.out.println("check");
 		rs.update();
+		Om.update();
+		Om.manageEnemies();
+		Om.checkCollision();
+	
 	}
 
 	void updateEndState() {
@@ -66,7 +70,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void drawupdateGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		rs.draw(g);
+		Om.draw(g);
 
 	}
 
@@ -139,15 +143,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			rs.left = true;
 			System.out.println("right");
 		}
-	if(e.getKeyCode() == KeyEvent.VK_UP){
-		rs.up = true;
-		
-	}
-	if(e.getKeyCode() == KeyEvent.VK_DOWN){
-		rs.down = true;
-		
-	}
-	
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			rs.up = true;
+
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			rs.down = true;
+
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			Om.addObject(new Projectile(rs.x + rs.width/2, rs.y, 10, 10));
+
+		}
 	}
 
 	@Override
@@ -162,17 +169,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			rs.left = false;
 			System.out.println("right");
 		}
-	if(e.getKeyCode() == KeyEvent.VK_UP){
-		rs.up = false;
-		
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			rs.up = false;
+
+		}
+		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+			rs.down = false;
+
+		}
+
 	}
-	if(e.getKeyCode() == KeyEvent.VK_DOWN){
-		rs.down = false;
-		
-	}
-	
-	
 }
-	}
-
-
