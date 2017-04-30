@@ -1,6 +1,4 @@
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 
 public class Rocketship extends GameObject {
 	int speed;
@@ -18,14 +16,11 @@ public class Rocketship extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		System.out.println("draw: " + x);
-		g.fillRect(x, y, width, height);
-
+		g.drawImage(GamePanel.alienImg, x, y, width, height, null);
 	}
 
 	void update() {
-super.update();
+		super.update();
 		if (up == true) {
 			y -= 5;
 
@@ -42,6 +37,6 @@ super.update();
 			x -= 5;
 
 		}
-		//System.out.println("update:" + x);
+		// System.out.println("update:" + x);
 	}
 }
